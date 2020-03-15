@@ -11,6 +11,9 @@ source_type:
   type: string
   allowed: ['stockpile']
   required: True
+entry:
+  type: string
+  required: False
 value:
-  type: dict
+  type: string
   required: False

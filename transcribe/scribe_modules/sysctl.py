@@ -10,12 +10,11 @@ class Sysctl(ScribeModuleBaseClass):
                                        host_name=host_name,
                                        input_type=input_type,
                                        scribe_uuid=scribe_uuid)
-        if input_dict:
-            self.value = self._parse(input_dict)
 
-    def __iter__(self):
-        for attr, value in self.__dict__.items():
-            yield attr, value
 
-    def _parse(self, sysctl_data):
-        return sysctl_data
+    def parse(self):
+        for line in self._input_dict["sysctl"].split("\n"):
+            k, v = line.split("=")
+            self._dict["entry"] = k.strip()
+            self._dict["value"] = v.strip()
+            yield self._dict
